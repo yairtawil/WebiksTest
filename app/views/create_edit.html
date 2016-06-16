@@ -1,0 +1,102 @@
+  <div class="createdit-user">
+   <div class="blackscreen" ui-sref="home"></div>
+   <div class="main">
+    <div class="close" ui-sref="home">X</div>
+    <h4 class="text-{{user.id ? 'info' : 'success'}}">{{user.id ? 'Edit' : 'Create'}} user</h4>
+    <form class="form-horizontal" role="form" ng-submit="submitCreateEdit(user)">
+  
+
+      <div class="form-group">
+        <label class="control-label col-sm-3" for="first_name">*First name:</label>
+        <div class="col-sm-9">
+          <input ng-model="user.first_name" type="text"
+            class="form-control"
+            ng-style="validations.user.first_name && {border:'1px solid red'}"
+            ng-change="rmValidations('first_name')"
+            id="first_name"
+            placeholder="Enter first name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-3" for="last_name">*Last name:</label>
+        <div class="col-sm-9">
+          <input ng-model="user.last_name" type="text" 
+          class="form-control" 
+          id="last_name" 
+            ng-style="validations.user.last_name && {border:'1px solid red'}"
+            ng-change="rmValidations('last_name')"
+          placeholder="Enter last name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-3" for="email">*Email:</label>
+        <div class="col-sm-9">
+          <input 
+            ng-model="user.email"
+            type="email" 
+            class="form-control" 
+            id="email" 
+            ng-class="{'invalid': validations.user.email}"
+            ng-change="rmValidations('email')"
+            placeholder="Enter email">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label col-sm-3" for="phone">*Phone:</label>
+        <div class="col-sm-9">
+          <input 
+          type="text" 
+          ng-model="user.phone"
+          maxlength="10"
+          class="form-control"
+          id="phone"
+          placeholder="Enter phone" 
+          ng-class="{'invalid': validations.user.phone}"
+          ng-change="rmValidations('phone')"
+            >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-3" for="city">City:</label>
+        <div class="col-sm-9"> 
+          <!-- <input ng-model="user.city_id" type="text" class="form-control" id="city" placeholder="Enter city"> -->
+          <select class="form-control" ng-model="user.city_id" ng-options="item.id as item.engName for item in dataService.cities"></select>
+        </div>
+      </div>
+
+
+<div class="form-group">
+        <label class="control-label col-sm-3" for="city">Birthday:</label>
+        <div class="col-sm-9"> 
+          <input style="background-color: white;" class="form-control" id="datepicker" date-picker date="user.birthday"  ng-model="user.birthday" readonly placeholder="Birthday"/>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-3" for="zip-code">*Zip code:</label>
+        <div class="col-sm-9"> 
+          <input 
+            type="text"
+            ng-model="user.zip_code"
+            class="form-control"
+            id="zip-code"
+            placeholder="Enter zip-code"    
+            ng-class="{'invalid': validations.user.zip_code}"
+            ng-change="rmValidations('zip_code')"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-offset-3 col-sm-9 text-danger">{{validationsMessage()}}</label>
+      </div>
+      <div class="form-group"> 
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-{{user.id ? 'info' : 'success'}}">{{user.id ? 'Save' : 'Create'}}</button>
+        </div>
+      </div>
+    </form>

@@ -1,0 +1,97 @@
+      <message data="message"></message>
+      <div class="container">
+
+        <div class="btn-group" ng-if="anySelected()" ng-click="show_menu.action = !show_menu.action">
+          <button id="menu" class="create-btn btn btn-info glyphicon glyphicon-th-list" ng-click="openActionMenu()">
+          </button>
+        </div>
+
+          <ul class="dropdown open dropdown-menu users" ng-show="show_menu.action">
+            <li><a ui-sref="home.delete_confirm">Delete</a></li>
+            <li><a ng-click="favoriteSelected()">{{allFavorite() ? 'Not favorite': 'Favorite'}}</a></li>
+          </ul>
+
+         <div class="btn-group">
+          <button class="create-btn btn btn-success glyphicon glyphicon-plus" ng-click="openCreatedit()">
+          </button>
+        </div>
+        <form class="pull-right" ng-submit="searchSubmit()">
+
+
+          <div class="btn-group">
+            <input  class="form-control search-input" ng-model="search.input" />
+            <span class="glyphicon glyphicon-remove-circle clear-search" ng-show="search.input" ng-click="search.input = search.search_input = ''"></span>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-default glyphicon glyphicon-search" type="submit"></button>
+          </div>
+        </form>
+
+      <div ng-hide="noDate()">
+        <table class="table table-hover">
+          <tr>
+            <th><input type="checkbox"/><th>
+            <th class="clickable" ng-click="sort('favorite')">Favorite<span class="glyphicon glyphicon-triangle-{{sort_vars.direction === '-' ? 'bottom' : 'top'}}" ng-show="'favorite' === sort_vars.col_name"></span></th>
+
+            <th class="clickable" ng-click="sort(key)" ng-repeat="key in dataService.user_keys">{{key}} <span class="glyphicon glyphicon-triangle-{{sort_vars.direction === '-' ? 'bottom' : 'top'}}" ng-show="key === sort_vars.col_name"></span></th>
+            
+             <th class="clickable" ng-click="sort('last_updated')">Last Update<span class="glyphicon glyphicon-triangle-{{sort_vars.direction === '-' ? 'bottom' : 'top'}}" ng-show="'last_updated' === sort_vars.col_name"></span></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          
+          <tr class="clickable" 
+              ng-repeat-start="user in filterUsers(dataService.users)"
+              ng-class="{'selected_row': user.is_selected}">
+            <td><input type="checkbox" ng-model="user.is_selected"/><td>
+
+            <td ng-click="user.favorite = !user.favorite; updatedUser(user);" ng-class="{'sorted': 'favorite' === sort_vars.col_name}"><span class="glyphicon" ng-class="user.favorite || user.favorite_hover  ? 'glyphicon-star' : 'glyphicon-star-empty'" ng-mouseover="user.favorite_hover = true" ng-mouseleave="user.favorite_hover = false"></span></td>
+          
+            <td ng-click="user.expand = !user.expand" ng-repeat="key in dataService.user_keys" ng-class="{'sorted': key === sort_vars.col_name}">{{user[key]}}</td>
+
+            <td ng-click="user.expand = !user.expand" ng-class="{'sorted': 'last_update' === sort_vars.col_name}">
+              {{user.last_updated | date: "short"}}
+            </td>
+
+            <td><button class="btn btn-info glyphicon glyphicon-pencil" ng-click="openCreatedit(user)"></button></td>
+            <td><button class="btn btn-danger glyphicon glyphicon-trash" ng-click="deleteConfirm(user.id)"></button></td>
+            <td><div class="expand-arrow glyphicon glyphicon-chevron-right" ng-class="{'down': user.expand}" ng-click="user.expand = !user.expand"></div></td>
+          </tr>
+          <tr ng-repeat-end>
+            <td ng-show="user.expand" class="expand" colspan="12">
+              <div class="well inner">
+                <div class="close" ng-click="user.expand = false">X</div>
+                  <div class="no-icon glyphicon glyphicon-user" ng-hide="user.icon"></div>
+                  <img ng-show="user.icon" ng-src="{{user.icon}}"/>
+                  <div class="texts">
+                    <p><b>Id:</b>{{user.id}} </p>
+                    <p><b>First name:</b>{{user.first_name}} </p>
+                    <p><b>Last name:</b>{{user.last_name}} </p>
+                    <p><b>Email:</b>{{user.email}} </p>
+                  </div>
+                   <div class="texts">
+                    <p><b>Phone:</b>{{user.phone}} </p>
+                    <p><b>City:</b>{{getCityNameById(user.city_id)}} </p>
+                    <p><b>Birth Day:</b>{{user.birthday}} </p>
+                    <p><b>Favorite:</b><span ng-class="user.favorite ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty'"> </span> </p>
+                  </div>
+              </div>
+            </td>
+          </tr>
+      </table>
+
+      <ul class="pagination">
+        <li><a class="glyphicon glyphicon-chevron-left margin-right" ng-click="pagination.goLeft()"></a></li>
+        <li ng-repeat="page in pagination.paginationArray()" ng-class="{'active': pagination.page === page}" ng-click="pagination.page = page"><a>{{page}}</a></li>
+        <li><a class="glyphicon glyphicon-chevron-right margin-left" ng-click="pagination.goRight()"></a></li>
+      </ul>
+
+    </div>
+
+     <div class="well well-lg text-info no-data" ng-show="noDate()">
+        <h4>No data</h4>
+      </div>
+
+    <ui-view></ui-view>

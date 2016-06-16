@@ -1,0 +1,16 @@
+ <div class="delete_confirm">
+        <div class="blackscreen" ui-sref="home"></div>
+        <form class="main" ng-submit="deleteUsers()">
+          <h4>Are you sure you want to delete {{ userFullName() }}?</h4>
+          <div class="buttons">
+            <button class="btn btn-danger" ui-sref="home">
+            Cancel
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <button type="submit" class="btn btn-success">
+              OK 
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+          </div>
+        </form>
+      </div>

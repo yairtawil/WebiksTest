@@ -1,0 +1,83 @@
+.expand{
+	border: 1px solid gray;
+    overflow-y:auto;
+}
+.expand .well{
+    /*padding: 24px 15%;*/
+    padding: 25px 25px 0 100px;
+}    
+.expand img{
+    width: 15%;
+    float: left;
+}   
+.expand .no-icon{
+    font-size: 114px;
+    float: left;    
+}
+.expand .texts {
+    float: left;
+    margin-left: 30px;
+}
+.expand p{
+    position: relative;
+}
+.expand p span.glyphicon{
+    position: absolute;
+}
+.clickable{
+	cursor: pointer;
+}
+td div.expand-arrow{
+	cursor: pointer;
+	transition: 0.2s;
+}
+td div.expand-arrow.down{
+	transform: rotate(90deg);
+}
+
+td.sorted{
+    background-color: rgba(245, 245, 245, 0.63);
+}
+
+td span.glyphicon.glyphicon-star-empty, span.glyphicon.glyphicon-star{
+    color: gold;
+    font-size: 25px;
+}
+
+.expand div.well.inner{
+	height: 200px;
+}
+
+button.create-btn{
+	margin-bottom: 20px;
+}
+ul.dropdown-menu.users {
+	 top: 40px;
+    left: 0;
+    display: block;
+    position: absolute;
+}
+.pagination a{
+    cursor: pointer;
+}
+.pagination a.glyphicon.glyphicon-chevron-right.margin-left{
+    margin-left: 10px;
+}
+.pagination a.glyphicon.glyphicon-chevron-left.margin-right{
+    margin-right: 10px;
+}
+input.search-input {
+    padding: 6px 25px;
+}
+.clear-search{
+    position: absolute;
+    right: 11px;
+    top: 11px;
+}
+.no-data{
+    padding: 20%;
+    text-align: center;
+}
+tr.selected_row{
+    background-color: #f5f5f5;
+}

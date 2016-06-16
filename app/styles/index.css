@@ -1,0 +1,10 @@
+.message_directive{
+	position: fixed;
+	top:0;
+	width: 100%;
+    text-align: center;
+}
+.container{
+	position: relative;
+	cursor: pointer;
+}
