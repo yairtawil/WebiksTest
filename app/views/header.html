@@ -11,9 +11,9 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li ng-class="{'active': state.current.name === 'home'}"><a ui-sref="home">Home</a></li>
-          <li ng-class="{'active': state.current.name === 'analysis'}"><a ui-sref="analysis">Analysis</a></li>
-          <li ng-class="{'active': state.current.name === 'monitor'}"><a ui-sref="monitor">Monitor</a></li>
+          <li ng-class="{'active': state.includes('home.*')}"><a ui-sref="home">Home</a></li>
+          <li ng-class="{'active': state.includes('analysis')}"><a ui-sref="analysis">Analysis</a></li>
+          <li ng-class="{'active': state.includes('monitor')}"><a ui-sref="monitor">Monitor</a></li>
         </ul>
        
       </div>
